@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="seq_asset" model="ir.sequence">
+        <field name="name">Asset Sequence</field>
+        <field name="code">asset.asset</field>
+        <field name="prefix">AST</field>
+        <field name="padding">4</field>
+        <field name="number_next">1</field>
+    </record>
+
+    <record id="seq_room" model="ir.sequence">
+        <field name="name">Meeting Room Sequence</field>
+        <field name="code">meeting.room</field>
+        <field name="prefix">ROOM</field>
+        <field name="padding">3</field>
+        <field name="number_next">1</field>
+    </record>
+
+    <record id="seq_booking" model="ir.sequence">
+        <field name="name">Booking Sequence</field>
+        <field name="code">meeting.booking</field>
+        <field name="prefix">BOOK</field>
+        <field name="padding">4</field>
+        <field name="number_next">1</field>
+    </record>
+
+</odoo>

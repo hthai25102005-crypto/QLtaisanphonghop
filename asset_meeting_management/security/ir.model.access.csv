@@ -1,0 +1,23 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_asset_category_user,asset.category user,model_asset_category,group_asset_user,1,0,0,0
+access_asset_category_manager,asset.category manager,model_asset_category,group_asset_manager,1,1,1,1
+
+access_asset_asset_user,asset.asset user,model_asset_asset,group_asset_user,1,0,0,0
+access_asset_asset_manager,asset.asset manager,model_asset_asset,group_asset_manager,1,1,1,1
+
+access_meeting_room_user,meeting.room user,model_meeting_room,group_booking_user,1,0,0,0
+access_meeting_room_manager,meeting.room manager,model_meeting_room,group_booking_manager,1,1,1,1
+
+access_meeting_booking_user,meeting.booking user,model_meeting_booking,group_booking_user,1,1,1,0
+access_meeting_booking_manager,meeting.booking manager,model_meeting_booking,group_booking_manager,1,1,1,1
+
+access_asset_history_user,asset.history user,model_asset_history,group_asset_user,1,0,0,0
+access_asset_history_manager,asset.history manager,model_asset_history,group_asset_manager,1,1,1,1
+
+access_booking_asset_user,meeting.booking.asset user,model_meeting_booking_asset,group_booking_user,1,1,1,0
+access_booking_asset_manager,meeting.booking.asset manager,model_meeting_booking_asset,group_booking_manager,1,1,1,1
+
+access_dashboard,asset.dashboard,model_asset_dashboard,base.group_user,1,0,0,0
+
+access_booking_wizard,booking.wizard,model_booking_wizard,base.group_user,1,1,1,0

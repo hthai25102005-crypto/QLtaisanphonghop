@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="asset_tree" model="ir.ui.view">
+        <field name="name">asset.asset.tree</field>
+        <field name="model">asset.asset</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="employee_id"/>
+                <field name="purchase_date"/>
+                <field name="price" sum="Tổng"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="asset_form" model="ir.ui.view">
+        <field name="name">asset.asset.form</field>
+        <field name="model">asset.asset</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="image" widget="image"/>
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="serial"/>
+                            <field name="barcode"/>
+                            <field name="category_id"/>
+                        </group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="purchase_date"/>
+                            <field name="warranty_date"/>
+                            <field name="supplier"/>
+                            <field name="location"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="price"/>
+                            <field name="depreciation"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Ghi chú">
+                            <field name="note"/>
+                        </page>
+                        <page string="Lịch sử">
+                            <field name="history_ids">
+                                <tree>
+                                    <field name="date"/>
+                                    <field name="employee_id"/>
+                                    <field name="action"/>
+                                    <field name="description"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Lịch đặt">
+                            <field name="booking_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="title"/>
+                                    <field name="employee_id"/>
+                                    <field name="start_datetime"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="asset_search" model="ir.ui.view">
+        <field name="name">asset.asset.search</field>
+        <field name="model">asset.asset</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="category_id"/>
+                <field name="employee_id"/>
+                <filter name="available" string="Sẵn sàng" domain="[('state','=','available')]"/>
+                <filter name="using" string="Đang sử dụng" domain="[('state','=','using')]"/>
+                <separator/>
+                <group expand="0" string="Nhóm theo">
+                    <filter name="group_category" string="Danh mục" context="{'group_by':'category_id'}"/>
+                    <filter name="group_employee" string="Nhân viên" context="{'group_by':'employee_id'}"/>
+                    <filter name="group_state" string="Trạng thái" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="asset_kanban" model="ir.ui.view">
+        <field name="name">asset.asset.kanban</field>
+        <field name="model">asset.asset</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="state"/>
+                <field name="category_id"/>
+                <field name="price"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_content">
+                                <strong><field name="code"/></strong>
+                                <div class="text-muted"><field name="name"/></div>
+                                <field name="state" widget="badge"/>
+                                <div class="mt-2">
+                                    <i class="fa fa-tag"/> <field name="category_id"/>
+                                </div>
+                                <div>
+                                    <i class="fa fa-money"/> <field name="price"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="asset_action" model="ir.actions.act_window">
+        <field name="name">Danh sách tài sản</field>
+        <field name="res_model">asset.asset</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+</odoo>

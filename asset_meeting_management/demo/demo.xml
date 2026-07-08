@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="cate_laptop" model="asset.category">
+        <field name="name">Laptop</field>
+        <field name="code">DM_LAP</field>
+    </record>
+
+    <record id="cate_monitor" model="asset.category">
+        <field name="name">Màn hình</field>
+        <field name="code">DM_MON</field>
+    </record>
+
+    <record id="cate_projector" model="asset.category">
+        <field name="name">Máy chiếu</field>
+        <field name="code">DM_PRO</field>
+    </record>
+
+    <record id="cate_camera" model="asset.category">
+        <field name="name">Camera</field>
+        <field name="code">DM_CAM</field>
+    </record>
+
+    <record id="cate_printer" model="asset.category">
+        <field name="name">Máy in</field>
+        <field name="code">DM_PRI</field>
+    </record>
+
+    <record id="demo_asset1" model="asset.asset">
+        <field name="code">TS_001</field>
+        <field name="name">Dell Latitude 7420</field>
+        <field name="category_id" ref="cate_laptop"/>
+        <field name="price">28000000</field>
+        <field name="location">Phòng IT</field>
+        <field name="supplier">Dell Việt Nam</field>
+        <field name="state">available</field>
+    </record>
+
+    <record id="demo_asset2" model="asset.asset">
+        <field name="code">TS_002</field>
+        <field name="name">HP Elitebook 840</field>
+        <field name="category_id" ref="cate_laptop"/>
+        <field name="price">26000000</field>
+        <field name="location">Phòng Nhân sự</field>
+        <field name="state">available</field>
+    </record>
+
+    <record id="demo_asset3" model="asset.asset">
+        <field name="code">TS_003</field>
+        <field name="name">Máy chiếu Epson EB-2142W</field>
+        <field name="category_id" ref="cate_projector"/>
+        <field name="price">18000000</field>
+        <field name="state">available</field>
+    </record>
+
+    <record id="demo_asset4" model="asset.asset">
+        <field name="code">TS_004</field>
+        <field name="name">Samsung Monitor 27"</field>
+        <field name="category_id" ref="cate_monitor"/>
+        <field name="price">6500000</field>
+        <field name="state">available</field>
+    </record>
+
+    <record id="demo_asset5" model="asset.asset">
+        <field name="code">TS_005</field>
+        <field name="name">Canon LBP2900</field>
+        <field name="category_id" ref="cate_printer"/>
+        <field name="price">4200000</field>
+        <field name="state">available</field>
+    </record>
+
+    <record id="demo_room1" model="meeting.room">
+        <field name="code">PH_A101</field>
+        <field name="name">Phòng A101</field>
+        <field name="building">A</field>
+        <field name="floor">1</field>
+        <field name="capacity">10</field>
+        <field name="projector">1</field>
+        <field name="internet">1</field>
+    </record>
+
+    <record id="demo_room2" model="meeting.room">
+        <field name="code">PH_A201</field>
+        <field name="name">Phòng A201</field>
+        <field name="building">A</field>
+        <field name="floor">2</field>
+        <field name="capacity">25</field>
+        <field name="projector">1</field>
+        <field name="speaker">1</field>
+        <field name="television">1</field>
+    </record>
+
+    <record id="demo_room3" model="meeting.room">
+        <field name="code">PH_B301</field>
+        <field name="name">Phòng B301</field>
+        <field name="building">B</field>
+        <field name="floor">3</field>
+        <field name="capacity">50</field>
+        <field name="projector">1</field>
+        <field name="speaker">1</field>
+        <field name="television">1</field>
+        <field name="internet">1</field>
+    </record>
+
+</odoo>

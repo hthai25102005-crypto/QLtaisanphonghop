@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="room_a" model="meeting.room">
+        <field name="code">A01</field>
+        <field name="name">Meeting Room A</field>
+        <field name="capacity">10</field>
+        <field name="building">Main</field>
+        <field name="floor">1</field>
+    </record>
+
+    <record id="room_b" model="meeting.room">
+        <field name="code">B01</field>
+        <field name="name">Meeting Room B</field>
+        <field name="capacity">20</field>
+        <field name="building">Main</field>
+        <field name="floor">2</field>
+    </record>
+
+</odoo>

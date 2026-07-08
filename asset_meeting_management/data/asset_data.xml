@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="asset_1" model="asset.asset">
+        <field name="name">Dell Laptop</field>
+        <field name="code">ASSET001</field>
+        <field name="category_id" ref="asset_meeting_management.cat_it"/>
+        <field name="price">1200</field>
+        <field name="state">available</field>
+    </record>
+
+    <record id="asset_2" model="asset.asset">
+        <field name="name">Projector Epson</field>
+        <field name="code">ASSET002</field>
+        <field name="category_id" ref="asset_meeting_management.cat_office"/>
+        <field name="price">800</field>
+        <field name="state">available</field>
+    </record>
+
+</odoo>

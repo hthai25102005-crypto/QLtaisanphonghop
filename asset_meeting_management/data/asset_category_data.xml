@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="cat_it" model="asset.category">
+        <field name="name">IT Equipment</field>
+        <field name="code">IT</field>
+    </record>
+
+    <record id="cat_office" model="asset.category">
+        <field name="name">Office Equipment</field>
+        <field name="code">OFF</field>
+    </record>
+
+</odoo>

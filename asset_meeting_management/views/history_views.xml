@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="asset_history_tree" model="ir.ui.view">
+        <field name="name">asset.history.tree</field>
+        <field name="model">asset.history</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+                <field name="asset_id"/>
+                <field name="employee_id"/>
+                <field name="booking_id"/>
+                <field name="action"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="asset_history_form" model="ir.ui.view">
+        <field name="name">asset.history.form</field>
+        <field name="model">asset.history</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="asset_id"/>
+                            <field name="employee_id"/>
+                            <field name="booking_id"/>
+                        </group>
+                        <group>
+                            <field name="action"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="asset_history_search" model="ir.ui.view">
+        <field name="name">asset.history.search</field>
+        <field name="model">asset.history</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="asset_id"/>
+                <field name="employee_id"/>
+                <field name="booking_id"/>
+                <filter name="booking" string="Đặt phòng" domain="[('action','=','booking')]"/>
+                <filter name="use" string="Sử dụng" domain="[('action','=','use')]"/>
+                <filter name="return_" string="Thu hồi" domain="[('action','=','return')]"/>
+                <filter name="reserve" string="Đặt trước" domain="[('action','=','reserve')]"/>
+                <group expand="0" string="Nhóm theo">
+                    <filter name="group_asset" string="Tài sản" context="{'group_by':'asset_id'}"/>
+                    <filter name="group_employee" string="Nhân viên" context="{'group_by':'employee_id'}"/>
+                    <filter name="group_action" string="Loại" context="{'group_by':'action'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="asset_history_action" model="ir.actions.act_window">
+        <field name="name">Lịch sử tài sản</field>
+        <field name="res_model">asset.history</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

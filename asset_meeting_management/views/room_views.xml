@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="meeting_room_tree" model="ir.ui.view">
+        <field name="name">meeting.room.tree</field>
+        <field name="model">meeting.room</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="building"/>
+                <field name="floor"/>
+                <field name="capacity"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="meeting_room_form" model="ir.ui.view">
+        <field name="name">meeting.room.form</field>
+        <field name="model">meeting.room</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="building"/>
+                            <field name="floor"/>
+                        </group>
+                        <group>
+                            <field name="capacity"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group string="Trang thiết bị">
+                        <group>
+                            <field name="projector"/>
+                            <field name="television"/>
+                        </group>
+                        <group>
+                            <field name="speaker"/>
+                            <field name="internet"/>
+                            <field name="air_condition"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Mô tả">
+                            <field name="description"/>
+                        </page>
+                        <page string="Lịch đặt">
+                            <field name="booking_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="employee_id"/>
+                                    <field name="title"/>
+                                    <field name="start_datetime"/>
+                                    <field name="end_datetime"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="meeting_room_search" model="ir.ui.view">
+        <field name="name">meeting.room.search</field>
+        <field name="model">meeting.room</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="building"/>
+                <filter name="available" string="Trống" domain="[('state','=','available')]"/>
+                <filter name="busy" string="Đang sử dụng" domain="[('state','=','busy')]"/>
+                <filter name="repair" string="Đang sửa" domain="[('state','=','repair')]"/>
+                <group expand="0" string="Nhóm">
+                    <filter name="group_building" string="Tòa nhà" context="{'group_by':'building'}"/>
+                    <filter name="group_floor" string="Tầng" context="{'group_by':'floor'}"/>
+                    <filter name="group_state" string="Trạng thái" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="meeting_room_kanban" model="ir.ui.view">
+        <field name="name">meeting.room.kanban</field>
+        <field name="model">meeting.room</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="state"/>
+                <field name="building"/>
+                <field name="floor"/>
+                <field name="capacity"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_content">
+                                <strong><field name="code"/> - <field name="name"/></strong>
+                                <field name="state" widget="badge"/>
+                                <div class="text-muted"><i class="fa fa-building"/> <field name="building"/> - Tầng <field name="floor"/></div>
+                                <div><i class="fa fa-users"/> Sức chứa: <field name="capacity"/></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="meeting_room_action" model="ir.actions.act_window">
+        <field name="name">Phòng họp</field>
+        <field name="res_model">meeting.room</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+</odoo>

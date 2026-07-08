@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Dashboard Action -->
+    <record id="action_asset_dashboard" model="ir.actions.act_window">
+        <field name="name">Dashboard</field>
+        <field name="res_model">asset.dashboard</field>
+        <field name="view_mode">form</field>
+        <field name="target">main</field>
+    </record>
+
+    <!-- Dashboard Form View -->
+    <record id="asset_dashboard_form" model="ir.ui.view">
+        <field name="name">asset.dashboard.form</field>
+        <field name="model">asset.dashboard</field>
+        <field name="arch" type="xml">
+            <form string="Dashboard">
+                <sheet>
+                    <div class="row">
+                        <!-- Asset KPIs -->
+                        <div class="col-12 col-lg-6">
+                            <h4 class="mt-2 mb-1">
+                                <i class="fa fa-cubes"/> Tài sản
+                                <button type="object" name="action_open_assets" class="btn btn-sm btn-link">Xem tất cả</button>
+                            </h4>
+                            <table class="table table-sm">
+                                <tr><td>Tổng tài sản</td><td class="text-right"><b><field name="total_assets" nolabel="1"/></b></td></tr>
+                                <tr class="text-success"><td>Sẵn sàng</td><td class="text-right"><field name="available_assets" nolabel="1"/></td></tr>
+                                <tr class="text-warning"><td>Đang sử dụng</td><td class="text-right"><field name="using_assets" nolabel="1"/></td></tr>
+                                <tr class="text-danger"><td>Đang sửa</td><td class="text-right"><field name="repair_assets" nolabel="1"/></td></tr>
+                                <tr class="text-danger"><td>Hỏng</td><td class="text-right"><field name="broken_assets" nolabel="1"/></td></tr>
+                                <tr><td><b>Tổng giá trị</b></td><td class="text-right"><b><field name="total_asset_value" nolabel="1"/></b></td></tr>
+                            </table>
+                        </div>
+                        <!-- Room KPIs -->
+                        <div class="col-12 col-lg-6">
+                            <h4 class="mt-2 mb-1">
+                                <i class="fa fa-building"/> Phòng họp
+                                <button type="object" name="action_open_rooms" class="btn btn-sm btn-link">Xem tất cả</button>
+                            </h4>
+                            <table class="table table-sm">
+                                <tr><td>Tổng phòng</td><td class="text-right"><b><field name="total_rooms" nolabel="1"/></b></td></tr>
+                                <tr class="text-success"><td>Phòng trống</td><td class="text-right"><field name="available_rooms" nolabel="1"/></td></tr>
+                                <tr class="text-warning"><td>Đang sử dụng</td><td class="text-right"><field name="busy_rooms" nolabel="1"/></td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- Booking KPIs -->
+                    <div class="row">
+                        <div class="col-12">
+                            <h4 class="mt-2 mb-1">
+                                <i class="fa fa-calendar"/> Đặt phòng
+                                <button type="object" name="action_open_bookings" class="btn btn-sm btn-link">Xem tất cả</button>
+                            </h4>
+                            <table class="table table-sm">
+                                <tr class="text-info"><td>Hôm nay</td><td class="text-right"><b><field name="bookings_today" nolabel="1"/></b></td></tr>
+                                <tr class="text-warning"><td>Chờ duyệt</td><td class="text-right"><b><field name="pending_bookings" nolabel="1"/></b></td></tr>
+                                <tr class="text-success"><td>Đã duyệt</td><td class="text-right"><field name="approved_bookings" nolabel="1"/></td></tr>
+                                <tr><td>Hoàn thành</td><td class="text-right"><field name="done_bookings" nolabel="1"/></td></tr>
+                                <tr class="text-danger"><td>Đã hủy</td><td class="text-right"><field name="cancelled_bookings" nolabel="1"/></td></tr>
+                                <tr><td><b>Tổng lượt đặt</b></td><td class="text-right"><b><field name="total_bookings" nolabel="1"/></b></td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ============= GRAPH VIEWS ============= -->
+
+    <!-- Asset by State - Bar Chart -->
+    <record id="asset_graph_state" model="ir.ui.view">
+        <field name="name">asset.asset.graph.state</field>
+        <field name="model">asset.asset</field>
+        <field name="arch" type="xml">
+            <graph string="Tài sản theo trạng thái" type="bar" orientation="vertical">
+                <field name="state"/>
+                <field name="price" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Asset by Category - Pie Chart -->
+    <record id="asset_graph_category" model="ir.ui.view">
+        <field name="name">asset.asset.graph.category</field>
+        <field name="model">asset.asset</field>
+        <field name="arch" type="xml">
+            <graph string="Tài sản theo danh mục" type="pie">
+                <field name="category_id"/>
+                <field name="price" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Asset Pivot -->
+    <record id="asset_pivot" model="ir.ui.view">
+        <field name="name">asset.asset.pivot</field>
+        <field name="model">asset.asset</field>
+        <field name="arch" type="xml">
+            <pivot string="Thống kê tài sản">
+                <field name="category_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="price" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Booking by State - Bar -->
+    <record id="booking_graph_state" model="ir.ui.view">
+        <field name="name">meeting.booking.graph.state</field>
+        <field name="model">meeting.booking</field>
+        <field name="arch" type="xml">
+            <graph string="Đặt phòng theo trạng thái" type="bar" orientation="vertical">
+                <field name="state"/>
+                <field name="duration" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Booking by Month - Line -->
+    <record id="booking_graph_month" model="ir.ui.view">
+        <field name="name">meeting.booking.graph.month</field>
+        <field name="model">meeting.booking</field>
+        <field name="arch" type="xml">
+            <graph string="Đặt phòng theo tháng" type="line">
+                <field name="start_datetime" interval="month"/>
+                <field name="duration" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Booking Pivot -->
+    <record id="booking_pivot" model="ir.ui.view">
+        <field name="name">meeting.booking.pivot</field>
+        <field name="model">meeting.booking</field>
+        <field name="arch" type="xml">
+            <pivot string="Thống kê đặt phòng">
+                <field name="room_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="duration" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Room by Building - Bar -->
+    <record id="room_graph_building" model="ir.ui.view">
+        <field name="name">meeting.room.graph.building</field>
+        <field name="model">meeting.room</field>
+        <field name="arch" type="xml">
+            <graph string="Phòng theo tòa nhà" type="bar">
+                <field name="building"/>
+                <field name="capacity" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- History by Action - Bar -->
+    <record id="history_graph_action" model="ir.ui.view">
+        <field name="name">asset.history.graph.action</field>
+        <field name="model">asset.history</field>
+        <field name="arch" type="xml">
+            <graph string="Lịch sử theo hành động" type="bar">
+                <field name="action"/>
+                <field name="id" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- History Pivot -->
+    <record id="history_pivot" model="ir.ui.view">
+        <field name="name">asset.history.pivot</field>
+        <field name="model">asset.history</field>
+        <field name="arch" type="xml">
+            <pivot string="Thống kê lịch sử">
+                <field name="asset_id" type="row"/>
+                <field name="action" type="col"/>
+                <field name="id" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Report Actions -->
+    <record id="action_report_asset" model="ir.actions.act_window">
+        <field name="name">Thống kê tài sản</field>
+        <field name="res_model">asset.asset</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="context">{'search_default_group_category': 1}</field>
+    </record>
+
+    <record id="action_report_booking" model="ir.actions.act_window">
+        <field name="name">Thống kê đặt phòng</field>
+        <field name="res_model">meeting.booking</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="context">{'search_default_group_room': 1}</field>
+    </record>
+
+    <record id="action_report_history" model="ir.actions.act_window">
+        <field name="name">Thống kê lịch sử</field>
+        <field name="res_model">asset.history</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="context">{'search_default_group_asset': 1}</field>
+    </record>
+
+</odoo>
